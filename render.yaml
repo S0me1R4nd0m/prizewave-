@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: streaming-giveaway-platform
+    env: node
+    buildCommand: ./render-build.sh
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: prizewave-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+
+databases:
+  - name: prizewave-db
+    ipAllowList: []  # Allow all IPs
